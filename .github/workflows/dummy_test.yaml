@@ -1,0 +1,24 @@
+name: Dummy CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build_and_test:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      
+    - name: Build with GCC
+      run: make
+
+    - name: Build with CLANG
+      run: make clang
+      
+    - name: Run the main
+      run: make run

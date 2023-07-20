@@ -1,0 +1,11 @@
+{
+    "name": "vcpkg-test",
+    "version": "0.0.1",
+    "dependencies": [
+        {
+            "name": "gtest",
+            "version>=": "1.13.0"
+        }
+    ],
+    "builtin-baseline": "fbec0d7bc4c1c2663dce1eff3331427cf42134fb"
+}
