@@ -7,18 +7,20 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build_and_test:
-
+  build:
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
       
     - name: Build with GCC
-      run: make
+      run: make gcc-build-only
+
+    - name: Run the exe
+      run: make run
 
     - name: Build with CLANG
-      run: make clang
+      run: make clang-build-only
       
-    - name: Run the main
+    - name: Run the exe
       run: make run

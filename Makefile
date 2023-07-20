@@ -15,6 +15,11 @@ all: check-gcc build $(BUILD_DIR)/main-gcc
 # Can call "make clang" to use CLANG compiler
 clang: build check-clang $(BUILD_DIR)/main-clang
 
+# -- Options for github
+gcc-build-only: build $(BUILD_DIR)/main-gcc
+clang-build-only: build $(BUILD_DIR)/main-clang
+# --
+
 $(BUILD_DIR)/main-gcc:
 	$(COMPILE_GCC) $(SRC_DIR)/main.cpp -o $(BUILD_DIR)/main
 
