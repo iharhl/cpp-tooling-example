@@ -30,7 +30,18 @@ In order to make it work, here are steps:
 3. Install Visual Studio tools:
     - C++ CMake tools for Windows
     - Universal Windows: Platform build tools
-4. Run command "vcpkg install" to install package specified in json file
+4. Run command <code>vcpkg install</code> to install package specified in json file
 5. Configure cmake
 
 For vcpkg.json the "builtin-baseline" is the baseline commit of vcpkg. I used the latest commit hash on master at that time.
+
+## CI / CD
+
+As a part of CI/CD a <code>dummy_test.yaml</code> is created. It is a workflow file that triggers a job based on provided conditions (in this case push to master).
+
+Due to the limitations of default GitHub actions, I don't perform:
+1. Static analysis (using cpp-check/clang-tidy) as default github tools don't have those.
+2. Cmake testing as the whole setup is quite cumbersome.
+
+The job actually fails on purpose. In the cpp file I clearly make a mistake by reading the array at index out of bounds. The gcc compiler with all of those warning flags set does not detect it, while clang does, thus fails.
+
