@@ -1,8 +1,8 @@
 # Tooling for C++ development
 
-NOTE: so far only tested on x86 Windows 11.
-
 ## GNU Make
+
+### Windows
 
 Install:
 1. llvm-mingw (clang compiler with extra tools) for x86_64 windows 
@@ -18,22 +18,57 @@ How to run:
 2. For running the built executable: <code>make run</code>
 3. To clean build/ folder call: <code>make clean</code>
 
+### MacOS
+
+% TODO
+
 ## CMake + vcpkg
 
-Installing vcpkg:
-1. Check the original website.
-2.  CMAKE_TOOLCHAIN_FILE
+### Windows
 
-In order to make it work, here are steps:
-1. Install vcpkg (I did in <code>C:\dev\vcpkg</code>) and run the <code>bootstrap-vcpkg.bat</code>. I also added the folder to the Path.
-2. Modify (if installed in different place) the <code>CMAKE_TOOLCHAIN_FILE</code> in <code>CMakeLists.txt</code>.
-3. Install Visual Studio tools:
+// Tested on Windows 11 on AMD chip.
+
+**Install CMake:**
+1. Dowloand the binaries from official website and un-archive the folder.
+2. Add <code> bin\ </code> folder to the system <code>PATH</code> environment variable (e.g. <code> C:\Program Files\CMake\bin </code>)
+3. If VS Code complains about not detecting the CMake, try modifying the <code>Cmake Path</code> to point to <code>cmake.exe</code>
+
+**Install vcpkg:**
+1. Clone the vcpkg repo: <code> git clone https://github.com/Microsoft/vcpkg.git </code>
+2. Run the bootstrap script to build vcpkg: <code>bootstrap-vcpkg.bat</code>. 
+3. I also added the folder to the <code>PATH</code> (not sure if it is needed).
+
+**Setup project:**
+1. Create a basic <code> CMakeLists.txt </code> as provided in this project.
+2. Modify (if needed) the <code> CMAKE_TOOLCHAIN_FILE </code> to point to the <code> vcpkg.cmake </code>
+3. Install Visual Studio tools (using VS installer):
     - C++ CMake tools for Windows
     - Universal Windows: Platform build tools
-4. Run command <code>vcpkg install</code> to install package specified in json file
-5. Configure cmake
+3. Run command <code> vcpkg install </code> to install package(s) specified in <code> vcpkg.json </code> file
+5. Configure CMake and build project.
 
-For vcpkg.json the "builtin-baseline" is the baseline commit of vcpkg. I used the latest commit hash on master at that time.
+NOTE: For <code> vcpkg.json </code> the "builtin-baseline" is the baseline commit of vcpkg repo. I used the latest commit hash on master at that time.
+
+### MacOS
+
+// Tested on macOS Ventura on M1 chip.
+
+**Install CMake:**
+1. Install CMake through homebrew: <code> brew install cmake </code>
+2. VS Code should detect it automatically
+
+If you installed CMake manually, you should provide a path to executable, see example below:
+![Alt text](img/image.png)
+
+**Install vcpkg:**
+1. Clone the vcpkg repo: <code> git clone https://github.com/Microsoft/vcpkg.git </code>
+2. Run the bootstrap script to build vcpkg: <code> ./vcpkg/bootstrap-vcpkg.sh </code>
+
+**Setup project:**
+1. Create a basic <code> CMakeLists.txt </code> as provided in this project.
+2. Modify (if needed) the <code> CMAKE_TOOLCHAIN_FILE </code> to point to the <code> vcpkg.cmake </code>
+3. Run command <code> vcpkg install </code> to install package(s) specified in <code> vcpkg.json </code> file
+4. Configure the CMake and build the project.
 
 ## CI / CD
 
